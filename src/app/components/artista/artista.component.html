@@ -1,1 +1,41 @@
-<p>artista works!</p>
+<app-loading *ngIf="loadingArtist"></app-loading>
+<div class="row" *ngIf="!loadingArtist">
+  <div class="col-2">
+    <img [src]="artista.images | noimage" alt="" class="img-thumbnail img-circle">
+  </div>
+  <div class="col">
+    <h3>{{artista.name}}</h3>
+    <!-- <p [href]="artista.external_urls.spotify" target="_blank">Ver en Spotify</p> -->
+  </div>
+  <div class="col-4 text-right">
+    <button class="btn btn-outline-danger" routerLink="/search">Refresar</button>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col table-responsive">
+    <table class="table text-bg-dark">
+      <thead>
+        <tr>
+          <th>Foto</th>
+          <th>Album</th>
+          <th>Cancion</th>
+          <th>Vista previa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let track of topTracks">
+          <td><img [src]="track.album.images[0].url" alt="{{track.album.name}}" class="img-thumb"></td>
+          <td>{{track.album.name}}</td>
+          <td>{{track.name}}</td>
+          <td>
+            <audio [src]="track.preview_url" controls></audio>
+            <!-- <iframe [src]="track.uri |domseguro: 'https://open.spotify.com/embed?uri='" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe> -->
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>
